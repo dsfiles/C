@@ -1,10 +1,18 @@
+/*
+the following four c header files are needed to run the program
+pthread.h is included to use the functions of the pthreads library such as pthread_create() and pthread_join()
+stdlib.h is header file that provides access to the POSIX operating system API. it defines something like standard symbolic constants (like NULL) and types, and process related functions
+stdio.h is standard input/output functions like printf()
+*/
 #include <pthread.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
 
+// define a global variable that is shared by all the functions (or methods)
 int myglobal;
 
+// create a function to run in a thread
 void* thread_function(void* arg)
 {
     int i, j;
@@ -12,17 +20,18 @@ void* thread_function(void* arg)
     {
         j = myglobal;
         j = j + 1;
-        printf(".");
-        fflush(stdout);
-        sleep(1);
+        printf(".");  // display a period to the screen
+        fflush(stdout);  // force the system to display the period (.) immediately
+        sleep(1); // suspend execution for an interval of time (1 second in this example)
         myglobal = j;
     }
-    return NULL;
+    return NULL; //return NULL (=0), you can think it doing nothing here
 }
 
+// main() function is the program entry point
 int main(void)
 {
-    pthread_t mythread;
+    pthread_t mythread; 
     int i;
     if (pthread_create(&mythread, NULL, thread_function, NULL))
     {
