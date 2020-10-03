@@ -31,8 +31,13 @@ void* thread_function(void* arg)
 // main() function is the program entry point
 int main(void)
 {
-    pthread_t mythread; 
+    pthread_t mythread; // pthread_t is the data type used to uniquely identify a thread, often an integer 
     int i;
+    /*
+    The pthread_create() function starts a new thread in the calling process. For more information, visit:
+    https://www.tutorialspoint.com/multithreading-in-c
+    https://www.tutorialspoint.com/multithreading-in-c
+    */
     if (pthread_create(&mythread, NULL, thread_function, NULL))
     {
         printf("error creating thread.");
@@ -47,11 +52,13 @@ int main(void)
         sleep(1);
     }
 
-    if (pthread_join(mythread, NULL))
+    //The pthread_join() function waits for mythread to terminate.
+    if (pthread_join(mythread, NULL)) // if successful, pthread_join() will return 0
     {
         printf("error joining thread.");
         abort();
     }
-    printf("\nmyglobal equals %d\n", myglobal);
+    
+    printf("\nmyglobal equals %d\n", myglobal); // at the very end, display the value of myglobal to the screen
     exit(0);
 }
