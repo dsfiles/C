@@ -1,5 +1,5 @@
 #include <pthread.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
 
@@ -17,12 +17,12 @@ void* thread_function(void* arg)
         sleep(1);
         myglobal = j;
     }
-    return NULL;
+    return 0;
 }
 
 int main(void)
 {
-    pthread_t mythread;
+    int mythread;
     int i;
     pthread_create(&mythread, NULL, thread_function, NULL);
     
@@ -36,5 +36,5 @@ int main(void)
 
     pthread_join(mythread, NULL);
     printf("\nmyglobal equals %d\n", myglobal);
-    exit(0);
+    //exit(0);
 }
