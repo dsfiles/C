@@ -20,7 +20,6 @@ void* thread_function(void* arg)
     return NULL;
 }
 
-
 int main(void)
 {
     pthread_t mythread;
